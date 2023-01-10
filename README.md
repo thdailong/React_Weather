@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## What we create?
+We build a web application that get api from:
+* Weather: https://openweathermap.org/
+* Cities: https://rapidapi.com/wirefreethought/api/geodb-cities/
+
+## Example
+<img src="/public/example.png" alt="Example" title="Example">
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,10 +22,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
