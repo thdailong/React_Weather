@@ -7,27 +7,31 @@ import {
 } from "react-accessible-accordion";
 import "./forecast.css";
 
-const Forecast = (data) => {
+const Forecast = ({ data }) => {
     const WeekDays = [
-        "Mondays",
+        "Sunday",
+        "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday",
     ];
 
-    const dayInWeek = new Date().getDay();
-    const dayForecast = WeekDays.splice(dayInWeek, WeekDays.length).concat(
-        WeekDays.splice(0, dayInWeek)
-    );
-    data = data.data;
+    const formatDate = (dateInput) => {
+        const date = new Date(dateInput);
+        const hours12Format =
+            (date.getHours() % 12) +
+            " " +
+            (date.getHours() >= 12 ? "pm" : "am");
+        return WeekDays[date.getDay()] + " - " + hours12Format;
+    };
+
     return (
         <>
             <label className="title">Daily</label>
             <Accordion allowZeroExpanded>
-                {data.list.splice(0, 7).map((item, idx) => (
+                {data.list.map((item, idx) => (
                     <AccordionItem key={idx}>
                         <AccordionItemHeading>
                             <AccordionItemButton>
@@ -38,13 +42,14 @@ const Forecast = (data) => {
                                         src={`icons/${item.weather[0].icon}.png`}
                                     />
                                     <label className="day">
-                                        {dayForecast[idx]}
+                                        {formatDate(item.dt_txt)}
                                     </label>
                                     <label className="description">
                                         {item.weather[0].description}
                                     </label>
                                     <label className="minmax">
-                                        {Math.round(item.main.temp_min)}°C / {Math.round(item.main.temp_max)}°C
+                                        {Math.round(item.main.temp_min)}°C /{" "}
+                                        {Math.round(item.main.temp_max)}°C
                                     </label>
                                 </div>
                             </AccordionItemButton>
@@ -73,7 +78,9 @@ const Forecast = (data) => {
                                 </div>
                                 <div className="daily-details-grid-item">
                                     <label>Feels like: </label>
-                                    <label>{Math.round(item.main.feels_like)}°C</label>
+                                    <label>
+                                        {Math.round(item.main.feels_like)}°C
+                                    </label>
                                 </div>
                             </div>
                         </AccordionItemPanel>
